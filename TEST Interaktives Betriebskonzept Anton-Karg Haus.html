@@ -19,7 +19,7 @@
       font-family: 'Inter', sans-serif;
       color: #333;
       line-height: 1.6;
-      background-image: url('Background1.jpg');
+      background-image: url('Background1.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -55,6 +55,13 @@
       z-index: 1;
     }
     
+    header h1,
+    header p {
+      position: relative;
+      z-index: 2;
+      max-width: 80%;
+    }
+    
     header h1 {
       font-family: 'Aptos', sans-serif;
       font-size: 2.5rem;
@@ -70,7 +77,6 @@
 
     .main-content {
       margin-top: 270px;
-      padding: 0 20px;
     }
 
     /* Mobile Carousel für Profilkarten */
@@ -111,20 +117,19 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
-      gap: 30px;
+      gap: 7%;
       padding: 40px 20px;
       background: transparent;
       position: relative;
       z-index: 2;
-      overflow: visible;
     }
 
     .profile-card {
       background: #fff;
       border-radius: 12px;
       overflow: hidden;
-      width: 300px;
-      transition: transform 0.5s ease-in-out;
+      width: 320px;
+      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       transform-origin: top center;
@@ -134,13 +139,14 @@
 
     .profile-card:hover {
       transform: scale(1.2) translateY(0);
+      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
     }
 
     .profile-card img {
       width: 100%;
       height: auto;
       display: block;
-      transition: transform 0.5s ease;
+      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
     }
 
     .profile-info {
@@ -182,13 +188,7 @@
         display: none;
       }
 
-      .profiles {
-        display: flex;
-        justify-content: center;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 40px 20px;
-      }
+      
     }
 
     /* Interaktives Hüttenbild */
@@ -215,7 +215,7 @@
       border-radius: 50%;
       background-color: rgba(255, 255, 255, 0.75);
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
-      transition: transform 0.5s ease;
+      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
     }
 
     .tooltip {
@@ -228,7 +228,7 @@
       max-width: 290px;
       word-wrap: break-word;
       opacity: 0;
-      transition: all 0.5s ease;
+      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
       pointer-events: none;
       z-index: 101;
       top: -70px;
@@ -247,11 +247,13 @@
 
     .marker:hover {
       transform: scale(2.4);
+      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
     }
 
     .marker:hover + .tooltip {
       opacity: 1;
       transform: translateX(-50%) scale(1);
+      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
     }
 
     /* Download-Bereich */
@@ -276,12 +278,14 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
       font-family: inherit;
     }
 
     .download-button:hover {
-      background-color: #1b5e20;
+      background-color: #1b5e20;      
+      transform: scale(0.8);
+      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
     }
 
     /* Footer */
