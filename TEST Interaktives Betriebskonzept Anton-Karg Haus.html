@@ -26,7 +26,7 @@
       background-attachment: fixed;
     }
 
-    /* Header */
+    /* Fixierter Header */
     header {
       position: relative;
       width: 100%;
@@ -71,7 +71,7 @@
     }
 
     .main-content {
-      margin-top: 290px;
+      margin-top: 20px;
       padding: 0 20px;
       background: #fff;
     }
@@ -88,18 +88,24 @@
       gap: 20px;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .carousel-container::-webkit-scrollbar {
+      display: none;
     }
 
     .carousel-track {
       display: flex;
       gap: 20px;
       min-width: 100%;
+      padding-bottom: 20px;
     }
 
     .card-slide {
       scroll-snap-align: start;
-      flex: 0 0 auto;
-      width: 300px;
+      flex: 0 0 90vw;
+      max-width: 320px;
       flex-shrink: 0;
     }
 
@@ -128,11 +134,8 @@
       z-index: 2;
     }
 
-    /* Deaktiviere Hover-Effekt auf Mobilgeräten */
-    @media (max-width: 768px) {
-      .profile-card:hover {
-        transform: none !important;
-      }
+    .profile-card:hover {
+      transform: scale(1.2) translateY(0);
     }
 
     .profile-card img {
@@ -184,8 +187,13 @@
       .card-slide {
         scroll-snap-align: start;
         flex: 0 0 auto;
-        width: 300px;
-        flex-shrink: 0;
+        width: 90vw;
+        max-width: 90vw;
+      }
+
+      .profile-card {
+        width: 90vw;
+        transform: none !important;
       }
     }
 
@@ -193,14 +201,21 @@
       .mobile-carousel {
         display: none;
       }
+
+      .profiles {
+        display: flex;
+        justify-content: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
     }
 
     /* Interaktives Hüttenbild */
     .interactive-map {
-      max-width: 100%;
-      margin: 0;
-      position: relative;
       width: 100%;
+      margin: 40px 0;
+      position: relative;
       overflow: hidden;
     }
 
@@ -243,6 +258,7 @@
       white-space: normal;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       text-align: center;
+      will-change: transform;
     }
 
     .tooltip strong {
@@ -259,11 +275,39 @@
       opacity: 1;
     }
 
+    /* Tooltip automatisch anpassen, damit sie im Sichtbereich bleiben */
+    @media (max-width: 768px) {
+      .tooltip {
+        max-width: 90vw;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1rem;
+        padding: 10px;
+      }
+
+      .marker {
+        transform: scale(1.2);
+      }
+
+      .marker:hover + .tooltip {
+        opacity: 1;
+        left: 50%;
+        transform: translateX(-50%) scale(1);
+      }
+    }
+
     /* Download-Bereich */
     .download-section {
       text-align: center;
       padding: 40px 20px;
       background-color: transparent;
+    }
+
+    .download-section h2 {
+      font-family: 'Aptos', sans-serif;
+      font-size: 1.5rem;
+      color: #2e7d32;
+      margin-bottom: 15px;
     }
 
     .download-button {
@@ -315,9 +359,9 @@
               <img src="Camila.png" alt="Camila Carneyro">
               <div class="profile-info">
                 <div class="profile-name">Camila Carneyro</div>
-                <div class="profile-role">Outdoor - Umweltbildung Kursleitung</div>
+                <div class="profile-role">Outdoor & Umweltbildung</div>
                 <div class="profile-summary">
-                  Als Zertifizierte Bergführerin, Dozentin und Landschaftsarchitektin bin ich Expertin für Natur, Flora/Fauna und Outdoor-Erlebnisse. Nachhaltigkeit und ein vielseitiges Gasterlebnis sind mir extrem wichtig.
+                  Zertifizierte Bergführerin, Dozentin und Landschaftsarchitektin. Expertin für Natur, Flora/Fauna, Outdoor-Erlebnisse und Nachhaltigkeit.
                 </div>
               </div>
             </div>
@@ -333,7 +377,7 @@
                 <div class="profile-name">Jacqueline Vollmann</div>
                 <div class="profile-role">Restaurantfachfrau & Organisatorin</div>
                 <div class="profile-summary">
-                  Erfahrene Restaurantfachfrau mit kaufmännischer Ausbildung. Stellvertretende Geschäftsführung im Fahrradhandel. Starke handwerkliche und organisatorische Kompetenz.
+                  Erfahrene Restaurantfachfrau mit kaufmännischer Ausbildung. Stellvertretende Geschäftsführerin im Fahrradhandel. Starke handwerkliche und organisatorische Kompetenz.
                 </div>
               </div>
             </div>
@@ -349,7 +393,7 @@
                 <div class="profile-name">Toni Vollmann</div>
                 <div class="profile-role">Gastronomie & Hüttenführung</div>
                 <div class="profile-summary">
-                  Mit jahrelanger Erfahrung in der Gastronomie, im Einzelhandel als stellvertretender Geschäftsführer und im Handwerk, bringe ich Leidenschaft für nachhaltige Küche, alpine Kultur und einen reibungslosen Betriebsablauf ein.
+                  Mit über 7 Jahren Erfahrung in der Gastronomie bringe ich Führungskompetenz, Transparenz und eine klare Hands-on-Mentalität ein.
                 </div>
               </div>
             </div>
