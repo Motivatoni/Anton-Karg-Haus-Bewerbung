@@ -12,15 +12,20 @@
       padding: 0;
       box-sizing: border-box;
     }
+
+    /* Hintergrund für die gesamte Seite */
     body {
       font-family: 'Inter', sans-serif;
       color: #333;
       line-height: 1.6;
-      background-image: url('Background1.png'); /* Hintergrundbild */
+      background-image: url('Background1.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Fixierter Header */
@@ -35,8 +40,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: flex-start; /* Text nach links geschoben */
-      text-align: left;
+      align-items: center;
+      text-align: center;
       padding: 40px 20px;
     }
     header::after {
@@ -51,8 +56,7 @@
       position: relative;
       z-index: 2;
       max-width: 90%;
-      margin: 5px 0;
-      padding-left: 20px;
+      margin: 5px auto;
     }
     header h1 {
       font-family: 'Aptos', sans-serif;
@@ -64,52 +68,26 @@
       color: #ddd;
     }
 
+    /* Hauptinhalt */
     .main-content {
       margin-top: 20px;
       padding: 0 20px;
       background: #fff;
+      flex: 1;
     }
 
-    /* Mobile Carousel für Profilkarten */
-    .mobile-carousel {
-      display: none;
-      padding: 20px 0;
-    }
-    .carousel-container {
-      overflow-x: auto;
-      display: flex;
-      gap: 20px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    .carousel-container::-webkit-scrollbar {
-      display: none;
-    }
-    .carousel-track {
-      display: flex;
-      gap: 20px;
-      min-width: 100%;
-      padding-bottom: 20px;
-    }
-    .card-slide {
-      scroll-snap-align: start;
-      flex: 0 0 90vw;
-      max-width: 320px;
-      flex-shrink: 0;
-    }
-
-    /* Standard Profilkarten-Ansicht */
+    /* Profilkarten für Desktop */
     .profiles {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
-      gap: 60px; /* Abstand vergrößert */
+      gap: 60px;
       padding: 40px 20px;
       background: transparent;
       position: relative;
       z-index: 2;
     }
+
     .profile-card {
       background: #fff;
       border-radius: 12px;
@@ -122,63 +100,106 @@
       position: relative;
       z-index: 2;
     }
+
     .profile-card:hover {
       transform: scale(1.2) translateY(0);
     }
+
     .profile-card img {
       width: 100%;
       height: auto;
       display: block;
       transition: transform 0.5s ease;
     }
+
     .profile-info {
       padding: 20px;
       background: #f9f9f9;
     }
+
     .profile-name {
       font-family: 'Aptos', sans-serif;
       font-size: 1.2rem;
       color: #2e7d32;
       margin-bottom: 10px;
     }
+
     .profile-role {
       font-weight: 600;
       color: #555;
       margin-bottom: 10px;
     }
+
     .profile-summary {
       font-size: 0.9rem;
       color: #666;
     }
 
-    /* Responsive Switch */
+    /* Responsive Carousel für Mobile */
+    .mobile-carousel {
+      display: none;
+      padding: 20px 0;
+    }
+
+    .carousel-container {
+      overflow-x: auto;
+      display: flex;
+      gap: 20px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .carousel-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      min-width: 100%;
+      padding-bottom: 20px;
+    }
+
+    .card-slide {
+      scroll-snap-align: start;
+      flex: 0 0 90vw;
+      max-width: 90vw;
+    }
+
     @media (max-width: 768px) {
       .profiles {
         display: none !important;
       }
+
       .mobile-carousel {
         display: block;
       }
+
       .carousel-track {
         display: flex;
         gap: 20px;
         min-width: 100%;
       }
+
       .card-slide {
         scroll-snap-align: start;
         flex: 0 0 auto;
         width: 90vw;
         max-width: 90vw;
       }
+
       .profile-card {
         width: 90vw;
         transform: none !important;
       }
     }
+
     @media (min-width: 769px) {
       .mobile-carousel {
         display: none;
       }
+
       .profiles {
         display: flex;
         justify-content: center;
@@ -188,13 +209,14 @@
       }
     }
 
-    /* Interaktives Hüttenbild */
+    /* Interaktives Bild */
     .interactive-map {
-      width: 100%;
-      margin: 40px 0;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
       position: relative;
       overflow: hidden;
     }
+
     .interactive-map img {
       width: 100%;
       height: auto;
@@ -202,6 +224,7 @@
       border-radius: 0;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
+
     .marker {
       position: absolute;
       z-index: 100;
@@ -213,6 +236,7 @@
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
       transition: transform 0.5s ease;
     }
+
     .tooltip {
       position: absolute;
       background: rgba(255, 255, 255, 0.95);
@@ -220,7 +244,6 @@
       padding: 12px;
       border-radius: 8px;
       font-size: 1.1rem;
-      max-width: 250px;
       word-wrap: break-word;
       opacity: 0;
       transition: all 0.5s ease;
@@ -233,32 +256,31 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       text-align: center;
       will-change: transform;
+      max-width: 90vw;
     }
+
     .tooltip strong {
       display: block;
       color: #333;
       margin-bottom: 8px;
     }
+
     .marker:hover {
       transform: scale(1.4);
     }
+
     .marker:hover + .tooltip {
       opacity: 1;
     }
 
-    @media (max-width: 768px) {
-      .tooltip {
-        max-width: 90vw;
-        left: 50%;
-        transform: translateX(-50%) scale(0.9);
-        font-size: 1rem;
-        padding: 10px;
-      }
-      .marker:hover + .tooltip {
-        opacity: 1;
-        left: 50%;
-        transform: translateX(-50%) scale(1);
-      }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px 10px;
+      background-color: #2e7d32;
+      color: white;
+      font-size: 0.9rem;
+      margin-top: 60px;
     }
 
     /* Download-Bereich */
@@ -267,12 +289,14 @@
       padding: 40px 20px;
       background-color: transparent;
     }
+
     .download-section h2 {
       font-family: 'Aptos', sans-serif;
       font-size: 1.5rem;
       color: #2e7d32;
       margin-bottom: 15px;
     }
+
     .download-button {
       background-color: #2e7d32;
       color: white;
@@ -284,18 +308,9 @@
       transition: background-color 0.3s ease;
       font-family: inherit;
     }
+
     .download-button:hover {
       background-color: #1b5e20;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 20px 10px;
-      background-color: #2e7d32;
-      color: white;
-      font-size: 0.9rem;
-      margin-top: 60px;
     }
   </style>
 </head>
@@ -408,36 +423,42 @@
   <!-- Interaktives Bild -->
   <div class="interactive-map">
     <img src="AntonKargHaus1.png" alt="Anton-Karg-Haus" />
+
     <!-- Marker 1 -->
     <div class="marker" style="top: 23.5%; left: 51.0%;" onmouseover="document.getElementById('tooltip1').style.opacity = '1';" onmouseout="document.getElementById('tooltip1').style.opacity = '0';"></div>
     <div id="tooltip1" class="tooltip" style="top: 17.6%; left: 51.8%;">
       <strong><h3>Einleitung & Motivation</h3></strong>
       Mit großer Leidenschaft für die Berge, traditioneller Hüttenkultur und nachhaltiger Gastronomie bewerben wir uns als Dreier-Team um diese besondere Hütte.
     </div>
+
     <!-- Marker 2 -->
     <div class="marker" style="top: 78.5%; left: 56.2%;" onmouseover="document.getElementById('tooltip2').style.opacity = '1';" onmouseout="document.getElementById('tooltip2').style.opacity = '0';"></div>
     <div id="tooltip2" class="tooltip" style="top: 71.5%; left: 56.2%;">
       <strong><h3>Gastronomisches Konzept</h3></strong>
       Moderne, gesunde Küche mit regionalen, saisonalen Produkten sowie vegetarischen und veganen Angeboten – transparent, nachhaltig und auf alle Gäste abgestimmt.
     </div>
+
     <!-- Marker 3 -->
     <div class="marker" style="top: 53.0%; left: 51.7%;" onmouseover="document.getElementById('tooltip3').style.opacity = '1';" onmouseout="document.getElementById('tooltip3').style.opacity = '0';"></div>
     <div id="tooltip3" class="tooltip" style="top: 46.0%; left: 51.7%;">
       <strong><h3>Service & Gästeerlebnis</h3></strong>
       Herzliche Gastfreundschaft, persönliche Beratung und Tipps für Wanderungen in der Region – damit sich jeder Gast willkommen fühlt.
     </div>
+
     <!-- Marker 4 -->
     <div class="marker" style="top: 73.8%; left: 86.8%;" onmouseover="document.getElementById('tooltip4').style.opacity = '1';" onmouseout="document.getElementById('tooltip4').style.opacity = '0';"></div>
     <div id="tooltip4" class="tooltip" style="top: 66.8%; left: 86.8%;">
       <strong><h3>Nachhaltigkeit</h3></strong>
       Reduzierung von Lebensmittelverschwendung, regionale Partnerschaften und Umweltbildung – damit Natur und Genuss Hand in Hand gehen.
     </div>
+
     <!-- Marker 5 -->
     <div class="marker" style="top: 65.3%; left: 12.7%;" onmouseover="document.getElementById('tooltip5').style.opacity = '1';" onmouseout="document.getElementById('tooltip5').style.opacity = '0';"></div>
     <div id="tooltip5" class="tooltip" style="top: 61.7%; left: 12.7%;">
       <strong><h3>Team & Organisation</h3></strong>
       Mit gemeinsam über 19 Jahren Erfahrung in der Gastronomie bringen wir Führungskompetenz, Transparenz und eine klare Hands-on-Mentalität ein.
     </div>
+
     <!-- Marker 6 -->
     <div class="marker" style="top: 29.5%; left: 70.1%;" onmouseover="document.getElementById('tooltip6').style.opacity = '1';" onmouseout="document.getElementById('tooltip6').style.opacity = '0';"></div>
     <div id="tooltip6" class="tooltip" style="top: 22.5%; left: 70.1%;">
@@ -453,6 +474,7 @@
     <br>
     <a href="Betriebskonzept Anton-Karg-Haus.pdf" class="download-button" target="_blank" rel="noopener noreferrer">PDF herunterladen</a>
   </section>
+
 </div>
 
 <!-- Footer -->
