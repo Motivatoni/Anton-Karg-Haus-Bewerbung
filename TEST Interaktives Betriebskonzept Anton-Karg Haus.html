@@ -13,7 +13,6 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      overflow-x: hidden;
     }
 
     body {
@@ -25,6 +24,7 @@
       background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
+      overflow-x: hidden;
     }
 
     /* Fixierter Header */
@@ -117,8 +117,6 @@
       box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
       position: relative;
       z-index: 2;
-      overflow: visible;
-      max-width: none;
     }
 
     .profile-card {
@@ -131,6 +129,7 @@
       transform-origin: top center;
       position: relative;
       z-index: 2;
+      overflow: hidden;
     }
 
     .profile-card:hover {
@@ -185,10 +184,7 @@
       }
 
       .profiles {
-        display: flex !important;
-        max-width: 100%;
-        width: auto;
-        padding: 40px 20px;
+        display: flex;
       }
     }
 
