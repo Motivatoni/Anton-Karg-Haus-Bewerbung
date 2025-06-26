@@ -80,24 +80,30 @@
     }
 
     .carousel-container {
-      overflow-x: visible;
+      overflow-x: auto;
       display: flex;
       gap: 20px;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    
+    .carousel-container::-webkit-scrollbar {
+      display: none; /* Entfernt Scrollbar (Chrome, Safari) */
     }
 
     .carousel-track {
       display: flex;
       gap: 20px;
       min-width: 100%;
+      padding-bottom: 20px;
     }
 
     .card-slide {
       scroll-snap-align: start;
-      flex: 1 1 auto;
+      flex: 0 0 auto;
       width: 300px;
-      flex-shrink: 1;
+      flex-shrink: 0;
     }
 
     /* Standard Profilkarten-Ansicht */
@@ -109,7 +115,6 @@
       padding: 40px 20px;
       background: transparent;
       margin-top: -5px;
-      border-radius: 20px 20px 0 0;
       box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
       position: relative;
       z-index: 2;
