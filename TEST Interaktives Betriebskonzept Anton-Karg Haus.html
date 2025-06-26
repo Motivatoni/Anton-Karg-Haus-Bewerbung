@@ -17,11 +17,11 @@
       font-family: 'Inter', sans-serif;
       color: #333;
       line-height: 1.6;
-      background-image: url('Background1.png');
+      background-image: url('Background1.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-attachment: fixed;
+      background-attachment: fixed; /* Hintergrund bleibt fixiert */
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -59,19 +59,18 @@
     }
     header h1 {
       font-family: 'Aptos', sans-serif;
-      font-size: 2.5rem;
+      font-size: calc(2.5rem + 0.5vw); /* Responsive Schriftgröße */
       color: #fff;
     }
     header p {
-      font-size: 1.1rem;
+      font-size: calc(1.1rem + 0.1vw);
       color: #ddd;
     }
 
     .main-content {
       margin-top: 20px;
       padding: 0 20px;
-      background: #fff;
-      flex: 1;
+      background: transparent; /* Transparenter Hintergrund für Inhalt */
     }
 
     /* Mobile Carousel für Profilkarten */
@@ -107,8 +106,8 @@
     .profiles {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 60px;
+      justify-content: space-around;
+      gap: 30px;
       padding: 40px 20px;
       background: transparent;
       position: relative;
@@ -194,8 +193,8 @@
 
     /* Interaktives Hüttenbild */
     .interactive-map {
-      width: 100vw;
-      margin-left: calc(-50vw + 50%);
+      width: 100%;
+      margin: 40px 0;
       position: relative;
       overflow: hidden;
     }
@@ -221,28 +220,26 @@
       position: absolute;
       background: rgba(255, 255, 255, 0.95);
       color: #555;
-      padding: 15px 20px;
-      border-radius: 10px;
+      padding: 12px;
+      border-radius: 8px;
       font-size: 1.1rem;
       word-wrap: break-word;
       opacity: 0;
       transition: all 0.5s ease;
       pointer-events: none;
       z-index: 101;
-      top: -100px;
+      top: -70px;
       left: 50%;
       transform: translateX(-50%);
       white-space: normal;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       text-align: center;
-      max-width: 90vw;
       will-change: transform;
     }
     .tooltip strong {
       display: block;
       color: #333;
-      margin-bottom: 10px;
-      font-size: 1.2rem;
+      margin-bottom: 8px;
     }
     .marker:hover {
       transform: scale(1.4);
@@ -251,19 +248,22 @@
       opacity: 1;
     }
 
-    /* Tooltip Positionierung für kleine Bildschirme */
-    @media (max-width: 600px) {
+    /* Tooltip automatisch anpassen, damit sie im Sichtbereich bleiben */
+    @media (max-width: 768px) {
       .tooltip {
-        font-size: 1rem;
-        padding: 10px 15px;
-        max-width: 85vw;
-        top: auto;
-        bottom: 110%;
+        max-width: 90vw;
         left: 50%;
         transform: translateX(-50%);
+        font-size: 1rem;
+        padding: 10px;
       }
-      .tooltip strong {
-        font-size: 1.1rem;
+      .marker {
+        transform: scale(1.2);
+      }
+      .marker:hover + .tooltip {
+        opacity: 1;
+        left: 50%;
+        transform: translateX(-50%) scale(1);
       }
     }
 
@@ -271,11 +271,11 @@
     .download-section {
       text-align: center;
       padding: 40px 20px;
-      background-color: transparent;
+      background: transparent; /* Transparenter Hintergrund */
     }
     .download-section h2 {
       font-family: 'Aptos', sans-serif;
-      font-size: 1.5rem;
+      font-size: calc(1.5rem + 0.2vw); /* Responsive Schriftgröße */
       color: #2e7d32;
       margin-bottom: 15px;
     }
@@ -343,7 +343,7 @@
                 <div class="profile-name">Jacqueline Vollmann</div>
                 <div class="profile-role">Restaurantfachfrau & Organisatorin</div>
                 <div class="profile-summary">
-                  Erfahrene Restaurantfachfrau mit kaufmännischer Ausbildung. Stellvertretende Geschäftsführerin im Fahrradhandel. Starke handwerkliche und organisatorische Kompetenz.
+                  Erfahrene Restaurantfachfrau mit kaufmännischer Ausbildung. Stellvertretende Geschäftsführung im Fahrradhandel. Starke handwerkliche und organisatorische Kompetenz.
                 </div>
               </div>
             </div>
