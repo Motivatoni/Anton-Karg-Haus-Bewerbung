@@ -9,31 +9,30 @@
   <link href="https://fonts.googleapis.com/css2?family=Aptos:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
+    /* Basis Reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
+      width: 100%;
+      height: 100%;
       font-family: 'Inter', sans-serif;
       color: #333;
-      line-height: 1.6;
-      background-image: url('Background1.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     /* Fixierter Header */
     header {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 999;
-      height: 250px;
+      height: 300px;
       background-image: url('AntonKargHaus2.png');
       background-size: cover;
       background-position: center;
@@ -46,56 +45,54 @@
       padding: 40px 20px;
     }
 
-    
     header::after {
       content: "";
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background: rgba(0, 0, 0, 0.5);
       z-index: 1;
     }
-    
+
     header h1,
     header p {
       position: relative;
       z-index: 2;
-      max-width: 80%;
+      max-width: 90%;
+      margin: 5px auto;
     }
-    
+
     header h1 {
       font-family: 'Aptos', sans-serif;
       font-size: 2.5rem;
       color: #fff;
-      margin-bottom: 10px;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
     }
 
     header p {
       font-size: 1.1rem;
-      color: #fff;
+      color: #ddd;
     }
 
+    /* Hauptinhalt */
     .main-content {
-      margin-top: 270px;
+      margin-top: 320px;
+      padding: 0 20px;
     }
 
     /* Mobile Carousel für Profilkarten */
     .mobile-carousel {
       display: none;
-      padding: 20px;
+      padding: 20px 0;
+      overflow: hidden;
     }
 
     .carousel-container {
-      overflow-x: auto;
       display: flex;
-      gap: 20px;
+      overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; /* Entfernt Scrollbar (Firefox) */
-    }
-
-    .carousel-container::-webkit-scrollbar {
-      display: none; /* Entfernt Scrollbar (Chrome, Safari) */
     }
 
     .carousel-track {
@@ -107,8 +104,8 @@
 
     .card-slide {
       scroll-snap-align: start;
-      flex: 0 0 auto;
-      width: 300px;
+      flex: 0 0 90vw;
+      max-width: 320px;
       flex-shrink: 0;
     }
 
@@ -117,7 +114,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
-      gap: 7%;
+      gap: 30px;
       padding: 40px 20px;
       background: transparent;
       position: relative;
@@ -128,8 +125,8 @@
       background: #fff;
       border-radius: 12px;
       overflow: hidden;
-      width: 320px;
-      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
+      width: 300px;
+      transition: transform 0.5s ease-in-out;
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       transform-origin: top center;
@@ -138,15 +135,14 @@
     }
 
     .profile-card:hover {
-      transform: scale(1.2) translateY(0);
-      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
+      transform: scale(1.2) translateY(-5px);
     }
 
     .profile-card img {
       width: 100%;
       height: auto;
       display: block;
-      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
+      transition: transform 0.5s ease;
     }
 
     .profile-info {
@@ -172,7 +168,7 @@
       color: #666;
     }
 
-    /* Responsive Switch */
+    /* Responsive Switch zwischen Carousel und normalen Cards */
     @media (max-width: 768px) {
       .profiles {
         display: none !important;
@@ -181,34 +177,37 @@
       .mobile-carousel {
         display: block;
       }
-    }
 
-    @media (min-width: 769px) {
-      .mobile-carousel {
-        display: none;
-      }
-      .profiles {
+      .carousel-track {
         display: flex;
-        justify-content: center;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 40px 20px;
+        gap: 20px;
+        min-width: 100%;
       }
-      
+
+      .card-slide {
+        flex: 0 0 90vw;
+        max-width: 90vw;
+      }
+
+      .profile-card {
+        width: 90vw;
+      }
     }
 
     /* Interaktives Hüttenbild */
     .interactive-map {
-      width: 100%;
-      margin: 0;
+      max-width: 100%;
+      margin: 40px 0;
       position: relative;
-      text-align: center;
+      width: 100%;
+      overflow: hidden;
     }
 
     .interactive-map img {
       width: 100%;
       height: auto;
       display: block;
+      border-radius: 0;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
 
@@ -221,7 +220,7 @@
       border-radius: 50%;
       background-color: rgba(255, 255, 255, 0.75);
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
-      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
+      transition: transform 0.5s ease;
     }
 
     .tooltip {
@@ -231,35 +230,32 @@
       padding: 12px;
       border-radius: 8px;
       font-size: 1.1rem;
-      max-width: 290px;
+      max-width: 250px;
       word-wrap: break-word;
       opacity: 0;
-      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
+      transition: all 0.5s ease;
       pointer-events: none;
       z-index: 101;
       top: -70px;
       left: 50%;
-      transform: translateX(-50%) scale(0.95);
+      transform: translateX(-50%);
       white-space: normal;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       text-align: center;
     }
 
     .tooltip strong {
-      color: #333;
       display: block;
+      color: #333;
       margin-bottom: 8px;
     }
 
     .marker:hover {
-      transform: scale(2.4);
-      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
+      transform: scale(1.4);
     }
 
     .marker:hover + .tooltip {
       opacity: 1;
-      transform: translateX(-50%) scale(1);
-      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
     }
 
     /* Download-Bereich */
@@ -284,14 +280,12 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
+      transition: background-color 0.3s ease;
       font-family: inherit;
     }
 
     .download-button:hover {
-      background-color: #1b5e20;      
-      transform: scale(0.8);
-      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
+      background-color: #1b5e20;
     }
 
     /* Footer */
@@ -327,9 +321,9 @@
               <img src="Camila.png" alt="Camila Carneyro">
               <div class="profile-info">
                 <div class="profile-name">Camila Carneyro</div>
-                <div class="profile-role">Outdoor - Umweltbildung & Kursleitung</div>
+                <div class="profile-role">Outdoor & Umweltbildung</div>
                 <div class="profile-summary">
-                  Als Zertifizierte Bergführerin, Dozentin und Landschaftsarchitektin bin ich Expertin für Natur, Flora/Fauna und Outdoor-Erlebnisse. Nachhaltigkeit und ein vielseitiges Gasterlebnis sind mir extrem wichtig.
+                  Zertifizierte Bergführerin, Dozentin und Landschaftsarchitektin. Expertin für Natur, Flora/Fauna, Outdoor-Erlebnisse und Nachhaltigkeit.
                 </div>
               </div>
             </div>
@@ -340,12 +334,12 @@
         <div class="card-slide">
           <a href="Lebenslauf Jacqueline.pdf" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
             <div class="profile-card">
-              <img src="Jacqueline.png" alt="Jacqueline Vollmann">
+              <img src="Jacqueline.heic" alt="Jacqueline Vollmann">
               <div class="profile-info">
                 <div class="profile-name">Jacqueline Vollmann</div>
                 <div class="profile-role">Restaurantfachfrau & Organisatorin</div>
                 <div class="profile-summary">
-                  Als erfahrene Restaurantfachfrau mit Industriekaufmännischer Ausbildung war ich Stellvertretende Geschäftsführung in Großkonzernen und bringe starke wirtschaftliche und organisatorische Kompetenzen ein.
+                  Erfahrene Restaurantfachfrau mit kaufmännischer Ausbildung. Stellvertretende Geschäftsführerin im Fahrradhandel. Starke handwerkliche und organisatorische Kompetenz.
                 </div>
               </div>
             </div>
@@ -361,7 +355,7 @@
                 <div class="profile-name">Toni Vollmann</div>
                 <div class="profile-role">Gastronomie & Hüttenführung</div>
                 <div class="profile-summary">
-                  Mit jahrelanger Erfahrung in der Gastronomie, im Einzelhandel als stellvertretender Geschäftsführer und im Handwerk, bringe ich Leidenschaft für nachhaltige Küche, alpine Kultur und einen reibungslosen Betriebsablauf ein.
+                  Mit über 7 Jahren Erfahrung in der Gastronomie bringe ich Führungskompetenz, Transparenz und eine klare Hands-on-Mentalität ein.
                 </div>
               </div>
             </div>
@@ -375,29 +369,15 @@
   <!-- Profilkarten für Desktop -->
   <section class="profiles">
 
-     <!-- Camila -->
-    <a href="Lebenslauf Camila.pdf" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
-      <div class="profile-card">
-        <img src="Camila.png" alt="Camila Carneyro">
-        <div class="profile-info">
-          <div class="profile-name">Camila Carneyro</div>
-          <div class="profile-role">Outdoor - Umweltbildung Kursleitung</div>
-          <div class="profile-summary">
-            Zertifizierte Bergführerin, Dozentin und Landschaftsarchitektin. Expertin für Natur, Flora/Fauna, Outdoor-Erlebnisse und Nachhaltigkeit.
-          </div>
-        </div>
-      </div>
-    </a>
-    
     <!-- Jacqueline -->
     <a href="Lebenslauf Jacqueline.pdf" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
       <div class="profile-card">
-        <img src="Jacqueline.png" alt="Jacqueline Vollmann">
+        <img src="Jacqueline.heic" alt="Jacqueline Vollmann">
         <div class="profile-info">
           <div class="profile-name">Jacqueline Vollmann</div>
           <div class="profile-role">Restaurantfachfrau & Organisatorin</div>
           <div class="profile-summary">
-            Als erfahrene Restaurantfachfrau mit Industriekaufmännischer Ausbildung war ich Stellvertretende Geschäftsführung in Großkonzernen und bringe starke wirtschaftliche und organisatorische Kompetenzen ein.
+            Erfahrene Restaurantfachfrau mit kaufmännischer Ausbildung. Stellvertretende Geschäftsführerin im Fahrradhandel. Starke handwerkliche und organisatorische Kompetenz.
           </div>
         </div>
       </div>
@@ -411,13 +391,25 @@
           <div class="profile-name">Toni Vollmann</div>
           <div class="profile-role">Gastronomie & Hüttenführung</div>
           <div class="profile-summary">
-            Mit jahrelanger Erfahrung in der Gastronomie, im Einzelhandel als stellvertretender Geschäftsführer und im Handwerk, bringe ich Leidenschaft für nachhaltige Küche, alpine Kultur und einen reibungslosen Betriebsablauf ein.
+            Mit über 7 Jahren Erfahrung in der Gastronomie bringe ich Führungskompetenz, Transparenz und eine klare Hands-on-Mentalität ein.
           </div>
         </div>
       </div>
     </a>
 
-   
+    <!-- Camila -->
+    <a href="Lebenslauf Camila.pdf" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+      <div class="profile-card">
+        <img src="Camila.png" alt="Camila Carneyro">
+        <div class="profile-info">
+          <div class="profile-name">Camila Carneyro</div>
+          <div class="profile-role">Outdoor & Umweltbildung</div>
+          <div class="profile-summary">
+            Zertifizierte Bergführerin, Dozentin und Landschaftsarchitektin. Expertin für Natur, Flora/Fauna, Outdoor-Erlebnisse und Nachhaltigkeit.
+          </div>
+        </div>
+      </div>
+    </a>
 
   </section>
 
