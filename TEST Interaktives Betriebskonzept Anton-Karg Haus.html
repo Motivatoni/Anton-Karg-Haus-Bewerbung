@@ -12,7 +12,7 @@
     * {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      box-sizing: border-box;      
     }
 
     body {
@@ -83,7 +83,7 @@
     }
 
     .carousel-container {
-      overflow-x: auto;
+      overflow-x: hidden;
       display: flex;
       gap: 20px;
       scroll-snap-type: x mandatory;
@@ -100,7 +100,7 @@
       scroll-snap-align: start;
       flex: 0 0 auto;
       width: 300px;
-      flex-shrink: 0;
+      flex-shrink: 3;
     }
 
     /* Standard Profilkarten-Ansicht */
@@ -116,14 +116,11 @@
       box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
       position: relative;
       z-index: 2;
-      overflow-x: visible;
-      max-width: none;
     }
 
     .profile-card {
       background: #fff;
       border-radius: 12px;
-      overflow: hidden;
       width: 300px;
       transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
       cursor: pointer;
@@ -131,7 +128,6 @@
       transform-origin: top center;
       position: relative;
       z-index: 2;
-      overflow-x: visible;
     }
 
     .profile-card:hover {
@@ -143,7 +139,7 @@
       width: 100%;
       height: auto;
       display: block;
-      transition: transform 0.5s ease-in-out;
+      transition: all 0.6s cubic-bezier(0.4, 1.2, 0.4, 1.5);
     }
 
     .profile-info {
@@ -170,7 +166,7 @@
     }
 
     /* Responsive Switch zwischen Carousel und normalen Cards */
-    @media (max-width: 768px) {
+    @media (max-width: 769px) {
       .profiles {
         display: none !important;
       }
@@ -186,7 +182,10 @@
       }
 
       .profiles {
-        display: flex;
+        display: flex !important;
+        max-width: 100%;
+        width: auto;
+        padding: 40px 20px;
       }
     }
 
@@ -237,7 +236,6 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       text-align: center;
       will-change: transform;
-      overflow-x: hidden;
     }
 
     .tooltip strong {
