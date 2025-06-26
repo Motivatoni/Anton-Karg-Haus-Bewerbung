@@ -23,11 +23,8 @@
       background-repeat: no-repeat;
       background-attachment: fixed;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
     }
 
-    /* Fixierter Header */
     header {
       position: relative;
       width: 100%;
@@ -59,18 +56,18 @@
     }
     header h1 {
       font-family: 'Aptos', sans-serif;
-      font-size: calc(2.5rem + 0.5vw); /* Responsive Schriftgröße */
+      font-size: calc(2rem + 0.5vw);
       color: #fff;
     }
     header p {
-      font-size: calc(1.1rem + 0.1vw);
+      font-size: calc(1rem + 0.1vw);
       color: #ddd;
     }
 
     .main-content {
       margin-top: 20px;
       padding: 0 20px;
-      background: transparent; /* Transparenter Hintergrund für Inhalt */
+      background: transparent;
     }
 
     /* Mobile Carousel für Profilkarten */
@@ -106,8 +103,8 @@
     .profiles {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
-      gap: 30px;
+      justify-content: center;
+      gap: 40px;
       padding: 40px 20px;
       background: transparent;
       position: relative;
@@ -154,7 +151,6 @@
       color: #666;
     }
 
-    /* Responsive Switch */
     @media (max-width: 768px) {
       .profiles {
         display: none !important;
@@ -178,6 +174,7 @@
         transform: none !important;
       }
     }
+
     @media (min-width: 769px) {
       .mobile-carousel {
         display: none;
@@ -191,10 +188,10 @@
       }
     }
 
-    /* Interaktives Hüttenbild */
+    /* Interaktives Hüttenbild - volle Breite */
     .interactive-map {
-      width: 100%;
-      margin: 40px 0;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
       position: relative;
       overflow: hidden;
     }
@@ -202,27 +199,29 @@
       width: 100%;
       height: auto;
       display: block;
-      border-radius: 0;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
+
+    /* Skalierbare Tooltips */
     .marker {
       position: absolute;
       z-index: 100;
       cursor: pointer;
-      width: 35px;
-      height: 35px;
+      width: calc(30px + 0.5vw);
+      height: calc(30px + 0.5vw);
       border-radius: 50%;
       background-color: rgba(255, 255, 255, 0.75);
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
       transition: transform 0.5s ease;
     }
+
     .tooltip {
       position: absolute;
       background: rgba(255, 255, 255, 0.95);
       color: #555;
-      padding: 12px;
+      padding: calc(10px + 0.3vw);
       border-radius: 8px;
-      font-size: 1.1rem;
+      font-size: calc(1rem + 0.2vw);
       word-wrap: break-word;
       opacity: 0;
       transition: all 0.5s ease;
@@ -234,48 +233,46 @@
       white-space: normal;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       text-align: center;
+      max-width: 80vw;
       will-change: transform;
     }
+
     .tooltip strong {
       display: block;
       color: #333;
       margin-bottom: 8px;
     }
+
     .marker:hover {
       transform: scale(1.4);
     }
+
     .marker:hover + .tooltip {
       opacity: 1;
     }
 
-    /* Tooltip automatisch anpassen, damit sie im Sichtbereich bleiben */
+    /* Tooltip auf kleineren Geräten optimieren */
     @media (max-width: 768px) {
       .tooltip {
+        font-size: calc(0.9rem + 0.2vw);
+        padding: 8px 12px;
         max-width: 90vw;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 1rem;
-        padding: 10px;
       }
       .marker {
-        transform: scale(1.2);
-      }
-      .marker:hover + .tooltip {
-        opacity: 1;
-        left: 50%;
-        transform: translateX(-50%) scale(1);
+        width: 25px;
+        height: 25px;
       }
     }
 
-    /* Download-Bereich */
+    /* Transparenter Download-Bereich */
     .download-section {
       text-align: center;
       padding: 40px 20px;
-      background: transparent; /* Transparenter Hintergrund */
+      background: transparent;
     }
     .download-section h2 {
       font-family: 'Aptos', sans-serif;
-      font-size: calc(1.5rem + 0.2vw); /* Responsive Schriftgröße */
+      font-size: calc(1.5rem + 0.2vw);
       color: #2e7d32;
       margin-bottom: 15px;
     }
@@ -283,7 +280,7 @@
       background-color: #2e7d32;
       color: white;
       padding: 12px 25px;
-      font-size: 1rem;
+      font-size: calc(1rem + 0.1vw);
       border: none;
       border-radius: 6px;
       cursor: pointer;
@@ -358,7 +355,7 @@
                 <div class="profile-name">Toni Vollmann</div>
                 <div class="profile-role">Gastronomie & Hüttenführung</div>
                 <div class="profile-summary">
-                  Mit über 7 Jahren Erfahrung in der Gastronomie bringe ich Führungskompetenz, Transparenz und eine klare Hands-on-Mentalität ein.
+                  Mit jahrelanger Erfahrung in der Gastronomie bringe ich Leidenschaft für nachhaltige Küche, alpine Kultur und einen reibungslosen Betriebsablauf ein.
                 </div>
               </div>
             </div>
