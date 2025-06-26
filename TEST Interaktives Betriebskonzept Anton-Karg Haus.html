@@ -56,11 +56,11 @@
     }
     header h1 {
       font-family: 'Aptos', sans-serif;
-      font-size: calc(2rem + 0.5vw); /* Responsive Schriftgröße */
+      font-size: calc(2rem + 0.5vw); /* Responsiv skaliert */
       color: #fff;
     }
     header p {
-      font-size: calc(1rem + 0.1vw); /* Responsiv angepasst */
+      font-size: calc(1rem + 0.1vw);
       color: #ddd;
     }
 
@@ -202,7 +202,7 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
 
-    /* Tooltips / Sprechblasen */
+    /* Marker */
     .marker {
       position: absolute;
       z-index: 100;
@@ -215,13 +215,14 @@
       transition: transform 0.5s ease;
     }
 
+    /* Tooltip */
     .tooltip {
       position: absolute;
       background: rgba(255, 255, 255, 0.95);
       color: #555;
       padding: 12px;
       border-radius: 8px;
-      font-size: 1.1rem;
+      font-size: calc(1rem + 0.2vw); /* Skalierende Schriftgröße */
       word-wrap: break-word;
       opacity: 0;
       transition: all 0.5s ease;
@@ -233,8 +234,8 @@
       white-space: normal;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       text-align: center;
+      max-width: 300px;
       will-change: transform;
-      max-width: 300px; /* Maximalbreite für Desktop */
     }
 
     .tooltip strong {
@@ -251,15 +252,16 @@
       opacity: 1;
     }
 
-    /* Mobile Optimierung der Tooltips */
+    /* Mobiloptimierte Tooltips */
     @media (max-width: 768px) {
       .tooltip {
-        font-size: calc(0.9rem + 0.2vw);
+        font-size: calc(0.9rem + 0.3vw); /* Noch feiner angepasst */
         padding: 10px;
-        max-width: 80vw;
+        max-width: 90vw;
         top: -60px;
         left: 50%;
-        transform: translateX(-50%) scale(0.9);
+        transform: translateX(-50%) scale(1);
+        border-radius: 10px;
       }
 
       .marker:hover + .tooltip {
@@ -305,6 +307,36 @@
       margin-top: 60px;
     }
   </style>
+
+  <!-- JavaScript zur dynamischen Tooltip-Positionierung -->
+  <script>
+    function updateTooltips() {
+      document.querySelectorAll('.marker').forEach(marker => {
+        const tooltip = marker.nextElementSibling;
+        if (!tooltip || !tooltip.classList.contains('tooltip')) return;
+
+        const rect = marker.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+
+        // Dynamische Positionierung außerhalb des Bildes
+        tooltip.style.top = `${rect.top - 80}px`;
+        tooltip.style.left = `${rect.left + rect.width / 2}px`;
+        tooltip.style.transform = `translateX(-50%)`;
+
+        // Verkleinere Tooltip bei kleinem Bildschirm
+        if (viewportWidth < 600) {
+          tooltip.style.maxWidth = '90vw';
+          tooltip.style.fontSize = 'calc(0.9rem + 0.3vw)';
+        } else {
+          tooltip.style.maxWidth = '300px';
+          tooltip.style.fontSize = '1.1rem';
+        }
+      });
+    }
+
+    window.addEventListener('load', updateTooltips);
+    window.addEventListener('resize', updateTooltips);
+  </script>
 </head>
 <body>
 
@@ -418,42 +450,42 @@
 
     <!-- Marker 1 -->
     <div class="marker" style="top: 23.5%; left: 51.0%;" onmouseover="document.getElementById('tooltip1').style.opacity = '1';" onmouseout="document.getElementById('tooltip1').style.opacity = '0';"></div>
-    <div id="tooltip1" class="tooltip" style="top: 17.6%; left: 51.8%;">
+    <div id="tooltip1" class="tooltip" style="opacity: 0;">
       <strong><h3>Einleitung & Motivation</h3></strong>
       Mit großer Leidenschaft für die Berge, traditioneller Hüttenkultur und nachhaltiger Gastronomie bewerben wir uns als Dreier-Team um diese besondere Hütte.
     </div>
 
     <!-- Marker 2 -->
     <div class="marker" style="top: 78.5%; left: 56.2%;" onmouseover="document.getElementById('tooltip2').style.opacity = '1';" onmouseout="document.getElementById('tooltip2').style.opacity = '0';"></div>
-    <div id="tooltip2" class="tooltip" style="top: 71.5%; left: 56.2%;">
+    <div id="tooltip2" class="tooltip" style="opacity: 0;">
       <strong><h3>Gastronomisches Konzept</h3></strong>
       Moderne, gesunde Küche mit regionalen, saisonalen Produkten sowie vegetarischen und veganen Angeboten – transparent, nachhaltig und auf alle Gäste abgestimmt.
     </div>
 
     <!-- Marker 3 -->
     <div class="marker" style="top: 53.0%; left: 51.7%;" onmouseover="document.getElementById('tooltip3').style.opacity = '1';" onmouseout="document.getElementById('tooltip3').style.opacity = '0';"></div>
-    <div id="tooltip3" class="tooltip" style="top: 46.0%; left: 51.7%;">
+    <div id="tooltip3" class="tooltip" style="opacity: 0;">
       <strong><h3>Service & Gästeerlebnis</h3></strong>
       Herzliche Gastfreundschaft, persönliche Beratung und Tipps für Wanderungen in der Region – damit sich jeder Gast willkommen fühlt.
     </div>
 
     <!-- Marker 4 -->
     <div class="marker" style="top: 73.8%; left: 86.8%;" onmouseover="document.getElementById('tooltip4').style.opacity = '1';" onmouseout="document.getElementById('tooltip4').style.opacity = '0';"></div>
-    <div id="tooltip4" class="tooltip" style="top: 66.8%; left: 86.8%;">
+    <div id="tooltip4" class="tooltip" style="opacity: 0;">
       <strong><h3>Nachhaltigkeit</h3></strong>
       Reduzierung von Lebensmittelverschwendung, regionale Partnerschaften und Umweltbildung – damit Natur und Genuss Hand in Hand gehen.
     </div>
 
     <!-- Marker 5 -->
     <div class="marker" style="top: 65.3%; left: 12.7%;" onmouseover="document.getElementById('tooltip5').style.opacity = '1';" onmouseout="document.getElementById('tooltip5').style.opacity = '0';"></div>
-    <div id="tooltip5" class="tooltip" style="top: 61.7%; left: 12.7%;">
+    <div id="tooltip5" class="tooltip" style="opacity: 0;">
       <strong><h3>Team & Organisation</h3></strong>
       Mit gemeinsam über 19 Jahren Erfahrung in der Gastronomie bringen wir Führungskompetenz, Transparenz und eine klare Hands-on-Mentalität ein.
     </div>
 
     <!-- Marker 6 -->
     <div class="marker" style="top: 29.5%; left: 70.1%;" onmouseover="document.getElementById('tooltip6').style.opacity = '1';" onmouseout="document.getElementById('tooltip6').style.opacity = '0';"></div>
-    <div id="tooltip6" class="tooltip" style="top: 22.5%; left: 70.1%;">
+    <div id="tooltip6" class="tooltip" style="opacity: 0;">
       <strong><h3>Zusammenarbeit mit dem Alpenverein</h3></strong>
       Veranstaltungen organisieren, Umweltgütesiegel aktiv tragen und die Tradition des Hauses bewahren – gemeinsam etwas Großes gestalten.
     </div>
@@ -466,7 +498,6 @@
     <br>
     <a href="Betriebskonzept Anton-Karg-Haus.pdf" class="download-button" target="_blank" rel="noopener noreferrer">PDF herunterladen</a>
   </section>
-
 </div>
 
 <!-- Footer -->
