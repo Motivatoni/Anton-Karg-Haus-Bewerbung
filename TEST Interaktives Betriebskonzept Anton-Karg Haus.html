@@ -4,22 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Anton-Karg-Haus - Bewerbung</title>
-  
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Aptos:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
       font-family: 'Inter', sans-serif;
       color: #333;
       line-height: 1.6;
-      background-image: url('Background1.jpg');
+      background-image: url('Background1.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -58,18 +56,18 @@
     }
     header h1 {
       font-family: 'Aptos', sans-serif;
-      font-size: 2.5rem;
+      font-size: calc(2rem + 0.5vw); /* Responsiv skaliert */
       color: #fff;
     }
     header p {
-      font-size: 1.1rem;
+      font-size: calc(1rem + 0.1vw);
       color: #ddd;
     }
 
     .main-content {
       margin-top: 20px;
       padding: 0 20px;
-      background: #fff;
+      background: transparent;
     }
 
     /* Mobile Carousel für Profilkarten */
@@ -105,8 +103,8 @@
     .profiles {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
-      gap: 30px;
+      justify-content: center;
+      gap: 40px;
       padding: 40px 20px;
       background: transparent;
       position: relative;
@@ -153,7 +151,6 @@
       color: #666;
     }
 
-    /* Responsive Switch */
     @media (max-width: 768px) {
       .profiles {
         display: none !important;
@@ -177,6 +174,7 @@
         transform: none !important;
       }
     }
+
     @media (min-width: 769px) {
       .mobile-carousel {
         display: none;
@@ -190,10 +188,10 @@
       }
     }
 
-    /* Interaktives Hüttenbild */
+    /* Interaktives Hüttenbild – volle Breite */
     .interactive-map {
-      width: 100%;
-      margin: 40px 0;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
       position: relative;
       overflow: hidden;
     }
@@ -201,9 +199,10 @@
       width: 100%;
       height: auto;
       display: block;
-      border-radius: 0;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
+
+    /* Marker */
     .marker {
       position: absolute;
       z-index: 100;
@@ -215,14 +214,15 @@
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
       transition: transform 0.5s ease;
     }
+
+    /* Tooltip */
     .tooltip {
       position: absolute;
       background: rgba(255, 255, 255, 0.95);
       color: #555;
       padding: 12px;
       border-radius: 8px;
-      font-size: 1.1rem;
-      max-width: 250px;
+      font-size: calc(1rem + 0.2vw); /* Skalierende Schriftgröße */
       word-wrap: break-word;
       opacity: 0;
       transition: all 0.5s ease;
@@ -234,32 +234,38 @@
       white-space: normal;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       text-align: center;
+      max-width: 300px;
       will-change: transform;
     }
+
     .tooltip strong {
       display: block;
       color: #333;
       margin-bottom: 8px;
     }
+
     .marker:hover {
       transform: scale(1.4);
     }
+
     .marker:hover + .tooltip {
       opacity: 1;
     }
 
-    /* Tooltip automatisch anpassen auf kleineren Bildschirmen */
+    /* Mobiloptimierte Tooltips */
     @media (max-width: 768px) {
       .tooltip {
-        max-width: 90vw;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 1rem;
+        font-size: calc(0.9rem + 0.3vw); /* Noch feiner angepasst */
         padding: 10px;
+        max-width: 90vw;
+        top: -60px;
+        left: 50%;
+        transform: translateX(-50%) scale(1);
+        border-radius: 10px;
       }
+
       .marker:hover + .tooltip {
         opacity: 1;
-        left: 50%;
         transform: translateX(-50%) scale(1);
       }
     }
@@ -268,11 +274,11 @@
     .download-section {
       text-align: center;
       padding: 40px 20px;
-      background-color: transparent;
+      background: transparent;
     }
     .download-section h2 {
       font-family: 'Aptos', sans-serif;
-      font-size: 1.5rem;
+      font-size: calc(1.5rem + 0.2vw);
       color: #2e7d32;
       margin-bottom: 15px;
     }
@@ -301,6 +307,36 @@
       margin-top: 60px;
     }
   </style>
+
+  <!-- JavaScript zur dynamischen Tooltip-Positionierung -->
+  <script>
+    function updateTooltips() {
+      document.querySelectorAll('.marker').forEach(marker => {
+        const tooltip = marker.nextElementSibling;
+        if (!tooltip || !tooltip.classList.contains('tooltip')) return;
+
+        const rect = marker.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+
+        // Dynamische Positionierung außerhalb des Bildes
+        tooltip.style.top = `${rect.top - 80}px`;
+        tooltip.style.left = `${rect.left + rect.width / 2}px`;
+        tooltip.style.transform = `translateX(-50%)`;
+
+        // Verkleinere Tooltip bei kleinem Bildschirm
+        if (viewportWidth < 600) {
+          tooltip.style.maxWidth = '90vw';
+          tooltip.style.fontSize = 'calc(0.9rem + 0.3vw)';
+        } else {
+          tooltip.style.maxWidth = '300px';
+          tooltip.style.fontSize = '1.1rem';
+        }
+      });
+    }
+
+    window.addEventListener('load', updateTooltips);
+    window.addEventListener('resize', updateTooltips);
+  </script>
 </head>
 <body>
 
@@ -412,38 +448,44 @@
   <div class="interactive-map">
     <img src="AntonKargHaus1.png" alt="Anton-Karg-Haus" />
 
-    <!-- Marker mit data-tooltip-id -->
-    <div class="marker marker1" style="top: 23.5%; left: 51.0%;" data-tooltip-id="tooltip1"></div>
-    <div class="marker marker2" style="top: 78.5%; left: 56.2%;" data-tooltip-id="tooltip2"></div>
-    <div class="marker marker3" style="top: 53.0%; left: 51.7%;" data-tooltip-id="tooltip3"></div>
-    <div class="marker marker4" style="top: 73.8%; left: 86.8%;" data-tooltip-id="tooltip4"></div>
-    <div class="marker marker5" style="top: 65.3%; left: 12.7%;" data-tooltip-id="tooltip5"></div>
-    <div class="marker marker6" style="top: 29.5%; left: 70.1%;" data-tooltip-id="tooltip6"></div>
-  </div>
-
-  <!-- Tooltip Container außerhalb des Bildes -->
-  <div class="tooltip-container">
-    <div id="tooltip1" class="marker-tooltip">
+    <!-- Marker 1 -->
+    <div class="marker" style="top: 23.5%; left: 51.0%;" onmouseover="document.getElementById('tooltip1').style.opacity = '1';" onmouseout="document.getElementById('tooltip1').style.opacity = '0';"></div>
+    <div id="tooltip1" class="tooltip" style="opacity: 0;">
       <strong><h3>Einleitung & Motivation</h3></strong>
       Mit großer Leidenschaft für die Berge, traditioneller Hüttenkultur und nachhaltiger Gastronomie bewerben wir uns als Dreier-Team um diese besondere Hütte.
     </div>
-    <div id="tooltip2" class="marker-tooltip">
+
+    <!-- Marker 2 -->
+    <div class="marker" style="top: 78.5%; left: 56.2%;" onmouseover="document.getElementById('tooltip2').style.opacity = '1';" onmouseout="document.getElementById('tooltip2').style.opacity = '0';"></div>
+    <div id="tooltip2" class="tooltip" style="opacity: 0;">
       <strong><h3>Gastronomisches Konzept</h3></strong>
       Moderne, gesunde Küche mit regionalen, saisonalen Produkten sowie vegetarischen und veganen Angeboten – transparent, nachhaltig und auf alle Gäste abgestimmt.
     </div>
-    <div id="tooltip3" class="marker-tooltip">
+
+    <!-- Marker 3 -->
+    <div class="marker" style="top: 53.0%; left: 51.7%;" onmouseover="document.getElementById('tooltip3').style.opacity = '1';" onmouseout="document.getElementById('tooltip3').style.opacity = '0';"></div>
+    <div id="tooltip3" class="tooltip" style="opacity: 0;">
       <strong><h3>Service & Gästeerlebnis</h3></strong>
       Herzliche Gastfreundschaft, persönliche Beratung und Tipps für Wanderungen in der Region – damit sich jeder Gast willkommen fühlt.
     </div>
-    <div id="tooltip4" class="marker-tooltip">
+
+    <!-- Marker 4 -->
+    <div class="marker" style="top: 73.8%; left: 86.8%;" onmouseover="document.getElementById('tooltip4').style.opacity = '1';" onmouseout="document.getElementById('tooltip4').style.opacity = '0';"></div>
+    <div id="tooltip4" class="tooltip" style="opacity: 0;">
       <strong><h3>Nachhaltigkeit</h3></strong>
       Reduzierung von Lebensmittelverschwendung, regionale Partnerschaften und Umweltbildung – damit Natur und Genuss Hand in Hand gehen.
     </div>
-    <div id="tooltip5" class="marker-tooltip">
+
+    <!-- Marker 5 -->
+    <div class="marker" style="top: 65.3%; left: 12.7%;" onmouseover="document.getElementById('tooltip5').style.opacity = '1';" onmouseout="document.getElementById('tooltip5').style.opacity = '0';"></div>
+    <div id="tooltip5" class="tooltip" style="opacity: 0;">
       <strong><h3>Team & Organisation</h3></strong>
       Mit gemeinsam über 19 Jahren Erfahrung in der Gastronomie bringen wir Führungskompetenz, Transparenz und eine klare Hands-on-Mentalität ein.
     </div>
-    <div id="tooltip6" class="marker-tooltip">
+
+    <!-- Marker 6 -->
+    <div class="marker" style="top: 29.5%; left: 70.1%;" onmouseover="document.getElementById('tooltip6').style.opacity = '1';" onmouseout="document.getElementById('tooltip6').style.opacity = '0';"></div>
+    <div id="tooltip6" class="tooltip" style="opacity: 0;">
       <strong><h3>Zusammenarbeit mit dem Alpenverein</h3></strong>
       Veranstaltungen organisieren, Umweltgütesiegel aktiv tragen und die Tradition des Hauses bewahren – gemeinsam etwas Großes gestalten.
     </div>
@@ -462,40 +504,6 @@
 <footer>
   © 2025 Toni Vollmann, Camila Carneyro, Jacqueline Vollmann – Bewerbung als Pächter des Anton-Karg-Hauses
 </footer>
-
-<script>
-  function updateTooltipPositions() {
-    document.querySelectorAll('.marker').forEach(marker => {
-      const tooltipId = marker.getAttribute('data-tooltip-id');
-      const tooltip = document.getElementById(tooltipId);
-
-      if (!tooltip) return;
-
-      const rect = marker.getBoundingClientRect();
-      const viewportWidth = window.innerWidth;
-
-      // Positioniere Tooltip über dem Marker, aber außerhalb des interaktiven Bildes
-      tooltip.style.top = `${rect.top - 80}px`;
-      tooltip.style.left = `${rect.left + rect.width / 2}px`;
-      tooltip.style.transform = `translateX(-50%)`;
-      tooltip.style.opacity = '1';
-      tooltip.style.maxWidth = viewportWidth < 768 ? '90vw' : '300px';
-
-      // Beim Verlassen Tooltip ausblenden
-      marker.addEventListener('mouseleave', () => {
-        tooltip.style.opacity = '0';
-      });
-
-      // Optional: Hover auch bei Touch unterstützen
-      marker.addEventListener('mouseenter', () => {
-        tooltip.style.opacity = '1';
-      });
-    });
-  }
-
-  window.addEventListener('load', updateTooltipPositions);
-  window.addEventListener('resize', updateTooltipPositions);
-</script>
 
 </body>
 </html>
