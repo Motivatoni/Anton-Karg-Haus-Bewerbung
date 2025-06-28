@@ -12,7 +12,6 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Inter', sans-serif;
       color: #333;
@@ -56,7 +55,7 @@
     }
     header h1 {
       font-family: 'Aptos', sans-serif;
-      font-size: calc(2rem + 0.5vw); /* Responsiv skaliert */
+      font-size: calc(2rem + 0.5vw);
       color: #fff;
     }
     header p {
@@ -65,8 +64,7 @@
     }
 
     .main-content {
-      margin-top: 20px;
-      padding: 0 20px;
+      margin-top: 10px;
       background: transparent;
     }
 
@@ -103,10 +101,12 @@
     .profiles {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px;
+      justify-content: space-evenly;
+      gap: 10px;
       padding: 40px 20px;
       background: transparent;
+      margin-top: -5px;
+      border-radius: 20px 20px 0 0;
       position: relative;
       z-index: 2;
     }
@@ -115,21 +115,22 @@
       border-radius: 12px;
       overflow: hidden;
       width: 300px;
-      transition: transform 0.5s ease-in-out;
+      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: -5px 0.1px 8px rgba(0,0,0,0.5);
       transform-origin: top center;
       position: relative;
       z-index: 2;
     }
     .profile-card:hover {
       transform: scale(1.2) translateY(0);
+      transition: all 0.6s cubic-bezier(0.4, 1.2, 0.4, 1.5);
     }
     .profile-card img {
       width: 100%;
       height: auto;
       display: block;
-      transition: transform 0.5s ease;
+      transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
     }
     .profile-info {
       padding: 20px;
@@ -151,58 +152,6 @@
       color: #666;
     }
 
-    @media (max-width: 768px) {
-      .profiles {
-        display: none !important;
-      }
-      .mobile-carousel {
-        display: block;
-      }
-      .carousel-track {
-        display: flex;
-        gap: 20px;
-        min-width: 100%;
-      }
-      .card-slide {
-        scroll-snap-align: start;
-        flex: 0 0 auto;
-        width: 90vw;
-        max-width: 90vw;
-      }
-      .profile-card {
-        width: 90vw;
-        transform: none !important;
-      }
-      .tooltip {
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        max-width: 90vw;
-        font-size: calc(1rem + 0.2vw);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: 101;
-      }
-
-      .marker:hover + .tooltip,
-      .marker:focus + .tooltip {
-        opacity: 1;
-  }
-    }
-
-    @media (min-width: 769px) {
-      .mobile-carousel {
-        display: none;
-      }
-      .profiles {
-        display: flex;
-        justify-content: center;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 40px 20px;
-      }
-    }
-
     /* Interaktives Hüttenbild – volle Breite */
     .interactive-map {
       width: 100vw;
@@ -217,91 +166,99 @@
       object-fit: cover;
       height: auto;
       display: block;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
-    /* Marker */
-    .marker {
-      position: absolute;
-      z-index: 100;
-      cursor: pointer;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.75);
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
-      transition: transform 0.5s ease;
-    }
-
-    /* Tooltip */
-    .tooltip {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.95);
-      color: #555;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: calc(1rem + 0.2vw); /* Skalierende Schriftgröße */
-      word-wrap: break-word;
-      opacity: 0;
-      transition: all 0.5s ease;
-      pointer-events: none;
-      z-index: 101;
-      top: -70px;
-      left: 50%;
-      transform: translateX(-50%);
-      white-space: normal;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      text-align: center;
-      max-width: 300px;
-      will-change: transform;
-    }
-
-    .tooltip strong {
-      display: block;
-      color: #333;
-      margin-bottom: 8px;
-    }
-    .mobile-tooltip {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 85vw;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      font-size: 1rem;
-      z-index: 200;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .marker:hover {
-      transform: scale(1.4);
-    }
-
-    .marker:hover + .tooltip {
-      opacity: 1;
-    }
-
-    /* Mobiloptimierte Tooltips */
+    /* --- MOBILE TOOLTIP ANFANG --- */
     @media (max-width: 768px) {
+      .profiles {
+        display: none !important;
+      }
+      .mobile-carousel {
+        display: block;
+      }
       .tooltip {
-        font-size: calc(0.9rem + 0.3vw); /* Noch feiner angepasst */
-        padding: 10px;
-        max-width: 90vw;
-        top: -60px;
+        display: none !important;
+      }
+      .mobile-tooltip {
+        position: fixed;
+        top: 50%;
         left: 50%;
-        transform: translateX(-50%) scale(1);
+        transform: translate(-50%, -50%);
+        width: 85vw;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.95);
         border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        font-size: 1rem;
+        z-index: 200;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.4s ease-in-out;
       }
+    }
+    /* --- MOBILE TOOLTIP ENDE --- */
 
-      .marker:hover + .tooltip {
-        opacity: 1;
-        transform: translateX(-50%) scale(1);
+    @media (min-width: 769px) {
+      .mobile-carousel {
+        display: none;
       }
+      .profiles {
+        display: flex;
+        justify-content: space-evenly;
+        max-width: 100vw;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+      .marker {
+        position: absolute;
+        z-index: 100;
+        cursor: pointer;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.75);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+        transition: all 0.8s cubic-bezier(0.4, 1.5, 0.4, 1.5);
+        opacity: 0.75;
+      }
+      .tooltip {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.95);
+        color: #555;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: calc(1rem + 0.2vw);
+        word-wrap: break-word;
+        opacity: 0;
+        transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
+        pointer-events: none;
+        z-index: 101;
+        top: -70px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.95);
+        white-space: normal;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        text-align: center;
+        max-width: 300px;
+        will-change: transform;
+      }      
+      .marker:hover {
+        transform: scale(2.0);
+        transition: all 0.8s cubic-bezier(0.4, 1.5, 0.4, 1.5);
+      }    
+      .tooltip:hover + .marker,
+      .marker:hover + .tooltip {
+        opacity: 0.75;
+        transform: translateX(-50%) scale(1.5);
+        transition: all 0.8s cubic-bezier(0.4, 2.5, 0.4, 1.5);
+      }
+      .tooltip strong {
+        display: block;
+        color: #333;
+        margin-bottom: 8px;
+      }    
     }
 
     /* Download-Bereich */
@@ -348,16 +305,13 @@
       document.querySelectorAll('.marker').forEach(marker => {
         const tooltip = marker.nextElementSibling;
         if (!tooltip || !tooltip.classList.contains('tooltip')) return;
-
         const rect = marker.getBoundingClientRect();
         const viewportWidth = window.innerWidth;
 
-        // Dynamische Positionierung außerhalb des Bildes
         tooltip.style.top = `${rect.top - 80}px`;
         tooltip.style.left = `${rect.left + rect.width / 2}px`;
         tooltip.style.transform = `translateX(-50%)`;
 
-        // Verkleinere Tooltip bei kleinem Bildschirm
         if (viewportWidth < 600) {
           tooltip.style.maxWidth = '90vw';
           tooltip.style.fontSize = 'calc(0.9rem + 0.3vw)';
@@ -367,25 +321,25 @@
         }
       });
     }
-    function isMobile() {
-      return window.innerWidth <= 768;
-    }
-  
+
     document.addEventListener('DOMContentLoaded', () => {
-      const tooltip = document.getElementById('mobileTooltip');
-      if (!isMobile() || !tooltip) return;
-  
+      const mobileTooltip = document.getElementById('mobileTooltip');
+      if (!mobileTooltip || window.innerWidth > 768) return;
+
       document.querySelectorAll('.marker').forEach(marker => {
+        const tooltipContent = marker.nextElementSibling?.classList?.contains('tooltip')
+          ? marker.nextElementSibling.innerHTML
+          : '';
+
         marker.addEventListener('mouseenter', () => {
-          const content = marker.getAttribute('data-tooltip');
-          if (content) {
-            tooltip.innerHTML = content;
-            tooltip.style.opacity = '1';
+          if (tooltipContent) {
+            mobileTooltip.innerHTML = tooltipContent;
+            mobileTooltip.style.opacity = '1';
           }
         });
-  
+
         marker.addEventListener('mouseleave', () => {
-          tooltip.style.opacity = '0';
+          mobileTooltip.style.opacity = '0';
         });
       });
     });
@@ -403,6 +357,9 @@
 </header>
 
 <div class="main-content">
+
+  <!-- ZENTRALER MOBILE TOOLTIP -->
+  <div id="mobileTooltip" class="mobile-tooltip"></div>
 
   <!-- Mobile Carousel für Profilkarten -->
   <section class="mobile-carousel">
