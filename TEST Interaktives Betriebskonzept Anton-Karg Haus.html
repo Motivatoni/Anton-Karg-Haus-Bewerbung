@@ -261,7 +261,23 @@
       color: #333;
       margin-bottom: 8px;
     }
-
+    .mobile-tooltip {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 85vw;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      font-size: 1rem;
+      z-index: 200;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
     .marker:hover {
       transform: scale(1.4);
     }
@@ -351,6 +367,28 @@
         }
       });
     }
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+  
+    document.addEventListener('DOMContentLoaded', () => {
+      const tooltip = document.getElementById('mobileTooltip');
+      if (!isMobile() || !tooltip) return;
+  
+      document.querySelectorAll('.marker').forEach(marker => {
+        marker.addEventListener('mouseenter', () => {
+          const content = marker.getAttribute('data-tooltip');
+          if (content) {
+            tooltip.innerHTML = content;
+            tooltip.style.opacity = '1';
+          }
+        });
+  
+        marker.addEventListener('mouseleave', () => {
+          tooltip.style.opacity = '0';
+        });
+      });
+    });
 
     window.addEventListener('load', updateTooltips);
     window.addEventListener('resize', updateTooltips);
