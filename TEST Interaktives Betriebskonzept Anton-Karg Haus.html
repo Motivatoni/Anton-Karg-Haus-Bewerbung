@@ -173,6 +173,21 @@
         width: 90vw;
         transform: none !important;
       }
+      .tooltip {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 90vw;
+        font-size: calc(1rem + 0.2vw);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 101;
+      }
+
+      .marker:hover + .tooltip,
+      .marker:focus + .tooltip {
+        opacity: 1;
+  }
     }
 
     @media (min-width: 769px) {
